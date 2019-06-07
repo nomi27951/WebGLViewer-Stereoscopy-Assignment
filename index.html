@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset='utf-8'/>
+        <!--  LOAD CSS STYLES -->
+        <link rel="stylesheet" href="GLV/style.css">
+        <!--  LOAD JAVASCRIPT SOURCES -->
+        <script type="text/javascript" src="libs/webgl-utils.js"></script>
+        <!-- GL Viewer -->
+        <script type="text/javascript" src="GLV/GLV.GlMatrix.js"></script>
+        <script type="text/javascript" src="GLV/GLV.js"></script>
+        <script type="text/javascript" src="GLV/GLV.Utils.js"></script>
+        <script type="text/javascript" src="GLV/GLV.ShaderManager.js"></script>
+        <script type="text/javascript" src="GLV/GLV.TextureManager.js"></script>
+        <script type="text/javascript" src="GLV/GLV.OBJParser.js"></script>
+        <script type="text/javascript" src="GLV/GLV.Material.js"></script>
+        <script type="text/javascript" src="GLV/GLV.Mesh.js"></script>
+        <script type="text/javascript" src="GLV/GLV.Object.js"></script>
+        <script type="text/javascript" src="GLV/GLV.Camera.js"></script>
+        <script type="text/javascript" src="GLV/GLV.Light.js"></script>
+        <script type="text/javascript" src="GLV/GLV.Scene.js"></script>
+        <script type="text/javascript" src="GLV/GLV.Input.js"></script>
+        <script type="text/javascript" src="GLV/DisplaySurface.js"></script>
+        <script type="text/javascript" src="GLV/CAVE.js"></script>
+        <!-- SHADERS -->
+        <script type="text/javascript" src="GLV/shaders/phong.js"></script>
+        <script type="text/javascript" src="GLV/shaders/light.js"></script>
+        <script type="text/javascript" src="GLV/shaders/cave.js"></script>
+    </head>
+    
+    <body class="text" onload='GLV.webGLStart()'>
+        
+        <div id="helpBox">
+            <button type="button" class="button text" id="buttonCloseHelp" onclick="GLV.uiToggleHelp()">X</button>
+            <b>Camera:</b> the "Camera" movement must be selected. <br>
+            - Rotate the camera: Mouse left + Mouse movement. <br>
+            - Move the camera: ASDWQE keys. <br>
+            - Zoom: Scroll wheel. <br>
+            - Place camera at the beginning: Press the button "Init position". <br>
+            - Place camera at the left eye: Press the button "Left eye". <br>
+            - Place camera at the right eye: Press the button "Right eye". <br>
+            <br>
+            <b>Scene:</b> the "Scene" movement must be selected. <br>
+            - Move the scene: ASDWQE keys. <br>
+            - Scale the scene: Scroll wheel. <br>
+            <br>
+            <b>User eyes:</b> the "Eyes" movement must be selected. <br>
+            - Move the eyes: ASDWQE keys. <br>
+            - Change interocular distance: Scroll wheel. <br>
+            <br>
+            <b>Load model:</b> A model in ".obj" format can be loaded by <br>
+            dragging and dropping the ".obj" and the ".mtl" (if exists) <br>
+            at the same time over the "Drag & drop" box.
+        </div>
+        
+        <div id="left">
+            <!-- WEBGL canvas -->
+            <canvas id='mainCanvas'></canvas>
+            <div id='TextFPS'> 0 fps </div>
+        </div>
+        
+        <div id="right">
+            <button type="button" class="button text" id="buttonHelp" onclick="GLV.uiToggleHelp()">Help</button>
+            <div id="boxMovement"> &nbsp<b>Movement: </b>
+                <div id="rbGroupMovement"> <form action=""> 
+                    <input type="radio" class="radioB" name="moveRB" onclick="GLV.uiSelectedMoveModeChanged(GLV.MOVEMODE_CAMERA)" checked="">Camera<br>
+                    <input type="radio" class="radioB" name="moveRB" onclick="GLV.uiSelectedMoveModeChanged(GLV.MOVEMODE_SCENE)">Scene<br>
+                    <input type="radio" class="radioB" name="moveRB" onclick="GLV.uiSelectedMoveModeChanged(GLV.MOVEMODE_EYES)">Eyes
+                </form> </div>
+            </div>
+            <div id="boxCameraAt"> &nbsp<b>Place camera at: </b>
+                <div id="groupButCameraAt">
+                    <button type="button" class="button2 text" onclick="GLV.placeCameraAt(GLV.INIT_CAM_POS)"></button> Init position <br>
+                    <button type="button" class="button2 text" onclick="GLV.placeCameraAt(CAVE.leftEye)"></button> Left eye <br>
+                    <button type="button" class="button2 text" onclick="GLV.placeCameraAt(CAVE.rightEye)"></button> Right eye
+                </div>
+            </div>
+            
+            <!-- Load objects elements -->
+            <div id="dropObjZone"> <center>Drop .obj and <br>.mtl files here.</center> </div>
+            <output id="list"></output>
+        </div>
+    
+    </body>
+
+</html>
